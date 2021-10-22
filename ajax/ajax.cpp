@@ -38,7 +38,6 @@ QReplyTimeout::~QReplyTimeout()
 Ajax::Ajax(QObject *parent)
     :QObject(parent)
 {
-    //m_pNetworkManager=new QNetworkAccessManager(this);
 }
 
 Ajax::~Ajax()
@@ -66,14 +65,7 @@ void Ajax::get(QString url, QJSValue jsObj, QJSValue jsCb, QJSValue jsErr)
         return;
     }
 
-    //QReplyTimeout * pTimeout = new QReplyTimeout(pReply, 3000);
-
-    QTimer::singleShot(3000, [=]()mutable{
-        if(pReply->isRunning())
-        {
-            pReply->abort();
-        }
-    });
+    QReplyTimeout * pTimeout = new QReplyTimeout(pReply, 3000);
 
     connect(pReply, &QNetworkReply::finished, [=]()mutable{
         QVariant statusCode = pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
@@ -110,13 +102,7 @@ void Ajax::post(QString url, QJSValue jsObj, QJSValue jsCb, QJSValue jsErr)
         return;
     }
 
-    //QReplyTimeout * pTimeout = new QReplyTimeout(pReply, 3000);
-    QTimer::singleShot(3000, [=]()mutable{
-        if(pReply->isRunning())
-        {
-            pReply->abort();
-        }
-    });
+    QReplyTimeout * pTimeout = new QReplyTimeout(pReply, 3000);
 
     connect(pReply, &QNetworkReply::finished, [=]()mutable{
         QVariant statusCode = pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
