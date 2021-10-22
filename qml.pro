@@ -1,7 +1,8 @@
 TEMPLATE = subdirs
 
 
-SUBDIRS += ajax
+SUBDIRS += ajax \
+    toast
 SUBDIRS += cqml
 SUBDIRS += qmlpage_1
 SUBDIRS += qmlpage_2
